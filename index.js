@@ -16,7 +16,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         client.connect();
-
+        const toolCollection = client.db('best_tools').collection('tools');
     }
     finally {
 
