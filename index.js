@@ -61,36 +61,29 @@ async function run() {
             const tool = await toolCollection.findOne(query);
             res.send(tool);
         });
-        // // PUT
-        // app.put('/tool/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const deliveredQuantity = req.body;
-        //     console.log(deliveredQuantity);
-        //     const filter = { _id: ObjectId(id) };
-        //     const options = { upsert: true };
-        //     const updateDoc = {
-        //         $set: {
-        //             quantity: deliveredQuantity.newQuantity
-        //         }
-        //     };
-        //     const result = await toolCollection.updateOne(filter, updateDoc, options);
-        //     res.send(result);
-        // });
+        // PUT
+        app.put('/tool/:id', async (req, res) => {
+            const id = req.params.id;
+            const setQuantity = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    quantity: setQuantity.newQuantity
+                }
+            };
+            const result = await toolCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
 
-        // app.put('/tool/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const setQuantity = req.body;
-        //     const filter = { _id: ObjectId(id) };
-        //     const options = { upsert: true };
-        //     const updateDoc = {
-        //         $set: {
-        //             quantity: setQuantity.newQuantity
-        //         }
-        //     };
-        //     const result = await toolCollection.updateOne(filter, updateDoc, options);
-        //     res.send(result);
-        // });
-        // 
+        // DELETE
+        app.delete('/tool/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await toolCollection.deleteOne(query);
+            res.send(result);
+        });
+
     }
     finally {
 
